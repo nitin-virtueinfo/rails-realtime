@@ -1,5 +1,9 @@
 <% unless @o_single %>
   $("#myModal").modal('show');
 <% else %>
-  $("#div_update_form").html("<%= escape_javascript(render("form")) %>");
+	<% if is_superadmin? %>
+  	$("#div_update_form").html("<%= escape_javascript(render("form")) %>");
+  <% else %>
+  	$("#div_update_form").html("<%= escape_javascript(render("schools/form")) %>");
+  <% end %>	
 <% end %>
