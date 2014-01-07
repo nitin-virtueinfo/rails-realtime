@@ -1,7 +1,7 @@
 <% if flash[:notice] %>
 	<div class="alert alert-success"><%= flash[:notice] %><% flash[:notice] = nil %></div>
 <% end %>
-<%= form_for [:admin, @o_single], :remote => true, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for @o_single, :remote => true, :html => { :class => 'form-horizontal' } do |f| %>
   <%= f.hidden_field :id, :value => params[:id] %>	
 
   <div class="control-group">
@@ -15,16 +15,6 @@
   </div>
     
   <div class="control-group">
-    <%= f.label :user_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.select(:user_id, options_for_select(@users.collect {|r| [r.first_name.to_s + " " + r.last_name.to_s, r.id]}, (@o_single.user.id unless @o_single.user.nil?)), {:include_blank => 'Select user'}, {:class => "input-xlarge"}) %>
-      <% if @o_single.errors[:user_id].any? %>
-        <span class="text-error text-message"><%= @o_single.errors[:user_id].first %></span>
-      <% end %>
-    </div>
-  </div>
-
-  <div class="control-group">
     <%= f.label :email, :class => 'control-label' %>
     <div class="controls">
       <%= f.text_field :email, :class => 'input-xlarge' %>
@@ -34,16 +24,6 @@
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :owner, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :owner, :class => 'input-xlarge' %>
-     	<% if @o_single.errors[:owner].any? %>
-      	<span class="text-error text-message"><%= @o_single.errors[:owner].first %></span>
-    	<% end %>
-    </div>
-  </div>
-    
   <div class="control-group">
     <%= f.label :phone, :class => 'control-label' %>
     <div class="controls">
@@ -98,7 +78,7 @@
     
       <div class="span12">
           <%= f.submit t("general.save"), :class => 'btn btn-success' %>
-          <%= link_to t("general.cancel"), admin_schools_path, :class => 'btn' %>
+          <%= link_to t("general.cancel"), schools_path, :class => 'btn' %>
       </div><!--/span-->
     
   </div>

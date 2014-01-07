@@ -3,7 +3,6 @@
     <tr>
       <td><%= o_row.name %></td>
       <td><%= o_row.email %></td>
-      <td><%= o_row.owner %></td>
       <td><%= o_row.city %></td>
       <td><%= o_row.state %></td>
       <td><%= link_to t('general.edit'), edit_school_path(o_row), :class => 'btn btn-mini' %></td>
@@ -12,9 +11,7 @@
 <% else %>
   <tr>
     <td colspan="5">
-      <div class="alert alert-danger tc">
-        <%= t("general.record_not_found") %>
-      </div>
+			<%= t("general.record_not_found") %>
     </td>
   </tr>
 <% end %>  

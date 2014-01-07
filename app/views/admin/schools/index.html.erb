@@ -24,3 +24,20 @@
 <div id="div_update" class="schools">
   <%= render "fetchAll" %>    
 </div>
+
+
+<script type="text/javascript">
+  $(function() {
+    // Create a new client to connect to Faye
+    var client = new Faye.Client('http://localhost:9292/faye');
+
+    // Subscribe to the public channel
+    var public_subscription = client.subscribe('/admin_schools', function(data) {
+      $.ajax({
+        type: "GET",
+        dataType: "script",
+        url: '/' + data.text + '?faye=yes'
+      });
+    });
+  });
+</script>

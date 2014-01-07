@@ -6,6 +6,8 @@ client.publish('/admin/schools/<%= @o_single.id %>/edit', {
   sid: '<%= @o_single.id %>'
 });
 
+client.publish('/admin_schools', { text: 'admin/schools' });
+
 client.publish('/schools', { text: 'schools' });
 
 <% end %>

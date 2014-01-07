@@ -1,7 +1,7 @@
 class Admin::SchoolsController < ApplicationController
   before_filter :set_school, only: [:edit, :update, :destroy]
   before_filter :get_users, only: [:new, :create, :edit, :update]
-  before_action :require_superadmin
+  #before_action :require_superadmin, excpet: [:updateschool] 
   
   require 'will_paginate/array'
 

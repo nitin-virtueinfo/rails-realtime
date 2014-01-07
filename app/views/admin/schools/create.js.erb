@@ -2,4 +2,6 @@ $("#div_update_form").html("<%= escape_javascript(render("form")) %>");
 
 var client = new Faye.Client('http://localhost:9292/faye');
 
+client.publish('/admin_schools', { text: 'admin/schools' });
+
 client.publish('/schools', { text: 'schools' });

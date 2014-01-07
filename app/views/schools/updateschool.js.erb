@@ -1,0 +1,5 @@
+<% unless @o_single %>
+  $("#myModal").modal('show');
+<% else %>
+  $("#div_update_form").html("<%= escape_javascript(render("form")) %>");
+<% end %>

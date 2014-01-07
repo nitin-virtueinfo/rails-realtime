@@ -18,7 +18,7 @@
             <th><%= check_box_tag "rec[" + o_row.id.to_s + "]", "" %></th>
             <td><%= o_row.name %></td>
             <td><%= o_row.email %></td>
-            <td><%= o_row.owner %></td>
+            <td><%= o_row.user.name %></td>
             <td><%= o_row.city %></td>
             <td><%= o_row.state %></td>
             <td>
@@ -30,9 +30,7 @@
       <% else %>
         <tr>
           <td colspan="7">
-            <div class="alert alert-danger tc">
-              <%= t("general.record_not_found") %>
-            </div>
+						<%= t("general.record_not_found") %>
           </td>
         </tr>
       <% end %>

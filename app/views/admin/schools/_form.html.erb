@@ -15,9 +15,9 @@
   </div>
     
   <div class="control-group">
-    <%= f.label :user_id, :class => 'control-label' %>
+    <%= f.label :admin, :class => 'control-label' %>
     <div class="controls">
-      <%= f.select(:user_id, options_for_select(@users.collect {|r| [r.first_name.to_s + " " + r.last_name.to_s, r.id]}, (@o_single.user.id unless @o_single.user.nil?)), {:include_blank => 'Select user'}, {:class => "input-xlarge"}) %>
+      <%= f.select(:user_id, options_for_select(@users.collect {|r| [r.first_name.to_s + " " + r.last_name.to_s, r.id]}, (@o_single.user.id unless @o_single.user.nil?)), {:include_blank => 'Select Admin'}, {:class => "input-xlarge"}) %>
       <% if @o_single.errors[:user_id].any? %>
         <span class="text-error text-message"><%= @o_single.errors[:user_id].first %></span>
       <% end %>
@@ -34,16 +34,6 @@
     </div>
   </div>
 
-  <div class="control-group">
-    <%= f.label :owner, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :owner, :class => 'input-xlarge' %>
-     	<% if @o_single.errors[:owner].any? %>
-      	<span class="text-error text-message"><%= @o_single.errors[:owner].first %></span>
-    	<% end %>
-    </div>
-  </div>
-    
   <div class="control-group">
     <%= f.label :phone, :class => 'control-label' %>
     <div class="controls">

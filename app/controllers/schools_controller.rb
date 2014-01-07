@@ -48,6 +48,11 @@ class SchoolsController < ApplicationController
   end
 
   private
+  
+    def school_params
+      params.require(:school).permit!
+    end
+      
     # Use callbacks to share common setup or constraints between actions.
     def set_school
       @o_single = School.find(params[:id])
