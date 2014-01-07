@@ -1,0 +1,7 @@
+<%- model_class = School -%>
+<div class="page-header">
+  <h4><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h4>
+</div>
+<div id="div_update_form">
+  <%= render :partial => 'form' %>
+</div>

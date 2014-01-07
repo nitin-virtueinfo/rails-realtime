@@ -1,0 +1,57 @@
+<%= form_for @o_single, :url => { :action => 'index' }, :html => { :id => "index_form" }, :method => "get", :remote => true do |f| %>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+      	<th width="5%"><%= check_box_tag "check_all", "" %><%= t("general.all") %></th>
+        <th width="20%"><%=raw t("name") %></th>
+        <th width="20%"><%= t("email") %></th>
+        <th width="15%"><%= t("owner") %></th>
+        <th width="15%"><%= t("city")%></th>
+        <th width="10%"><%= t("state") %></th>
+        <th width="15%"><%= t("general.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if @schools.size > 0 %>
+        <% @schools.each do |o_row| %>
+          <tr>
+            <th><%= check_box_tag "rec[" + o_row.id.to_s + "]", "" %></th>
+            <td><%= o_row.name %></td>
+            <td><%= o_row.email %></td>
+            <td><%= o_row.owner %></td>
+            <td><%= o_row.city %></td>
+            <td><%= o_row.state %></td>
+            <td>
+              <%= link_to t('general.edit'), edit_admin_school_path(o_row), :class => 'btn btn-mini' %>
+              <%= link_to t('general.destroy'), admin_school_path(o_row), :method => :delete, :remote => true, :data => { :confirm => t('general.confirm') }, :class => 'btn btn-mini btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+      <% else %>
+        <tr>
+          <td colspan="7">
+            <div class="alert alert-danger tc">
+              <%= t("general.record_not_found") %>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="fr">
+    <table>
+      <tr>
+        <td><%= render 'layouts/common_pager' %></td>
+        <td>
+          <%= select_tag "set_pager_number", options_for_select(get_pager_numbers, session[:set_pager_number]),
+													      :data => { :remote => true, :url => url_for(:action => "index") },
+													      :class => ""  %>
+        </td>
+        <td>&nbsp;</td>
+        <td>
+          <%= will_paginate @schools %>
+        </td>
+      </tr>
+    </table>
+  </div>
+<% end %>

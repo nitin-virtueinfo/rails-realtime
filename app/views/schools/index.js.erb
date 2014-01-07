@@ -1,0 +1,19 @@
+$("#count_records").html("<%= @schools.count %>");
+
+<% if params[:school] %>
+	$("#schools-list table tbody").html("<%= escape_javascript(render("fetchAll")).html_safe %>");
+<% else %>
+	<% unless params[:faye] == 'yes' %>
+		$("#schools-list table tbody").append("<%= escape_javascript(render("fetchAll")).html_safe %>");
+		$('a.load-more-schools').attr('href', "<%= schools_path page: @schools.next_page %>");
+	<% else %>
+		$("#schools-list table tbody").html("<%= escape_javascript(render("fetchAll")).html_safe %>");
+	<% end %>
+<% end %>
+
+
+<% if @schools.next_page %>
+  $('.user-school-paging').html("<%= escape_javascript(link_to 'Load More Schools', schools_path(:page => @schools.next_page), :class => 'load-more-schools', :remote => true).html_safe %>");
+<% else %>
+  $('.user-school-paging a.load-more-schools').remove();
+<% end %>

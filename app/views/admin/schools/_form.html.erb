@@ -1,0 +1,106 @@
+<% if flash[:notice] %>
+	<div class="alert alert-success"><%= flash[:notice] %><% flash[:notice] = nil %></div>
+<% end %>
+<%= form_for [:admin, @o_single], :remote => true, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.hidden_field :id, :value => params[:id] %>	
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'input-xlarge' %>
+   	  <% if @o_single.errors[:name].any? %>
+    	  <span class="text-error text-message"><%= @o_single.errors[:name].first %></span>
+	    <% end %>
+    </div>
+  </div>
+    
+  <div class="control-group">
+    <%= f.label :user_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.select(:user_id, options_for_select(@users.collect {|r| [r.first_name.to_s + " " + r.last_name.to_s, r.id]}, (@o_single.user.id unless @o_single.user.nil?)), {:include_blank => 'Select user'}, {:class => "input-xlarge"}) %>
+      <% if @o_single.errors[:user_id].any? %>
+        <span class="text-error text-message"><%= @o_single.errors[:user_id].first %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :email, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :email, :class => 'input-xlarge' %>
+      <% if @o_single.errors[:email].any? %>
+        <span class="text-error text-message"><%= @o_single.errors[:email].first %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :owner, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :owner, :class => 'input-xlarge' %>
+     	<% if @o_single.errors[:owner].any? %>
+      	<span class="text-error text-message"><%= @o_single.errors[:owner].first %></span>
+    	<% end %>
+    </div>
+  </div>
+    
+  <div class="control-group">
+    <%= f.label :phone, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :phone, :class => 'input-xlarge' %>
+     	<% if @o_single.errors[:phone].any? %>
+      	<span class="text-error text-message"><%= @o_single.errors[:phone].first %></span>
+    	<% end %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :mobile, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :mobile, :class => 'input-xlarge' %>
+     	<% if @o_single.errors[:mobile].any? %>
+      	<span class="text-error text-message"><%= @o_single.errors[:mobile].first %></span>
+    	<% end %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :address, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :address, :class => 'input-xlarge' %>
+      <% if @o_single.errors[:address].any? %>
+        <span class="text-error text-message"><%= @o_single.errors[:address].first %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :state, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :state, :class => 'input-xlarge' %>
+   	  <% if @o_single.errors[:state].any? %>
+    	  <span class="text-error text-message"><%= @o_single.errors[:state].first %></span>
+	    <% end %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :city, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :city, :class => 'input-xlarge' %>
+     	<% if @o_single.errors[:city].any? %>
+      	<span class="text-error text-message"><%= @o_single.errors[:city].first %></span>
+    	<% end %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    
+      <div class="span12">
+          <%= f.submit t("general.save"), :class => 'btn btn-success' %>
+          <%= link_to t("general.cancel"), admin_schools_path, :class => 'btn' %>
+      </div><!--/span-->
+    
+  </div>
+    
+<% end %>

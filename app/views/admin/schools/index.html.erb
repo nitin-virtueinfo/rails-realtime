@@ -1,0 +1,26 @@
+<%- model_class = School -%>
+
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<div class="page-header">
+  <h4><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %> (<span id="count_records"><%= @schools.count %></span>)
+	<div class="searchRight fr">
+		<%= link_to t("general.search"), show_search_box_path("true", model_class, @params_arr.join(',')), :remote => true, :class => 'btn btn-primary btn-small' %>&nbsp;
+		<%= link_to t('general.add'), new_admin_school_path, :class => 'btn btn-primary btn-small' %>
+    <%= link_to t('general.destroy'), "#destroy_all", :id => "destroy_all", :class => 'btn btn-primary btn-small btn-danger' %>
+	</div>
+	</h4>
+</div>
+
+
+<div id="div_update_search">
+	<% if session[:search_params] %>
+		<% params[:model] = controller_name.classify %>
+		<%= render "fronts/search" %>
+	<% end %>
+</div>
+
+<div id="div_update" class="schools">
+  <%= render "fetchAll" %>    
+</div>

@@ -1,0 +1,61 @@
+
+<%- model_class = School -%>
+
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+<div class="page-header">
+  <h4>
+    <%=t '.title', :default => model_class.model_name.human.pluralize.titleize %> (<span id="count_records"><%= @schools.count %></span>)
+    <div class="searchRight fr">
+		  <%= link_to t("general.search"), show_search_box_path("true", model_class, @params_arr.join(',')), :remote => true, :class => 'btn btn-primary btn-small' %>&nbsp;
+	  </div>
+  </h4>
+</div>
+
+<div id="div_update_search">
+	<% if session[:search_params] %>
+		<% params[:model] = controller_name.classify %>
+		<%= render "search" %>
+	<% end %>
+</div>
+
+<div id="schools-list" class="schools">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th width="20%"><%=raw t("name") %></th>
+        <th width="20%"><%= t("email") %></th>
+        <th width="20%"><%= t("owner") %></th>
+        <th width="20%"><%= t("city")%></th>
+        <th width="20%"><%= t("state") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render "fetchAll" %>
+    </tbody>
+  </table>
+</div>
+
+
+<div class="fr user-school-paging">
+	<% if @schools.next_page %>
+		<%= link_to "Load More Schools", schools_path(:page => @schools.next_page), :class => "load-more-schools", :remote => true %>
+	<% end %>
+</div>
+
+<script type="text/javascript">
+  $(function() {
+    // Create a new client to connect to Faye
+    var client = new Faye.Client('http://localhost:9292/faye');
+
+    // Subscribe to the public channel
+    var public_subscription = client.subscribe('/schools', function(data) {
+      $.ajax({
+        type: "GET",
+        dataType: "script",
+        url: '/' + data.text + '?faye=yes'
+      });
+    });
+  });
+</script>
