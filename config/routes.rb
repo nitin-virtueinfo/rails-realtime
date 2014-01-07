@@ -21,7 +21,8 @@ ProjectApp::Application.routes.draw do
   get '/other/:page_id' => 'fronts#other', :as => :other
 
   # user schools
-  get '/schools' => 'schools#index', :as => :schools
+  #get '/schools' => 'schools#index', :as => :schools
+  resources :schools
 
   # You can have the root of your site routed with "root"
   root 'fronts#dashboard'

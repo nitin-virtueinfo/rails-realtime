@@ -11,7 +11,7 @@
 puts '==================================================================='
 puts 'Load super admin'
 puts '==================================================================='
-@admin = User.new(:last_name => 'admin', :first_name => 'admin', :password => 'password', :password_confirmation => 'password', :email => 'admin@example.com', :is_active => 1, :term => true)
+@admin = User.new(:last_name => 'super_admin', :first_name => 'super_admin', :password => 'password', :password_confirmation => 'password', :email => 'admin@example.com', :is_active => 1, :term => true)
 @admin.save(:validate => false)
 
 puts '==================================================================='
@@ -19,7 +19,8 @@ puts 'Load roles'
 puts '==================================================================='
 # Create a role type for users
 @admin_role = Role.create(:role_type => "SuperAdmin")
-Role.create(:role_type => "User")
+@aadmin_role = Role.create(:role_type => "Admin")
+@user_role = Role.create(:role_type => "User")
 
 puts '==================================================================='
 puts 'Load user roles'

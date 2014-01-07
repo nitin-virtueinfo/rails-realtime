@@ -7,8 +7,8 @@
         	<% if current_user %>
             <% if is_superadmin? %>
               <li><%= link_to t("general.schools"), admin_schools_path  %></li>
+              <li><%= link_to t("general.users"), admin_users_path  %></li>
           	<% elsif is_admin? %>
-          		<li><%= link_to t("general.users"), admin_users_path  %></li>
               <li><%= link_to t("general.schools"), schools_path  %></li>
           	<% end %>
           <% end %>	

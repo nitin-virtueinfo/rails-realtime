@@ -1,5 +1,7 @@
 class SchoolsController < ApplicationController
   require 'will_paginate/array'
+  before_filter :set_school, only: [:edit, :update]
+  before_filter :get_users, only: [:edit, :update]
   before_action :require_admin
 
   def index
@@ -33,4 +35,26 @@ class SchoolsController < ApplicationController
     @params_arr = ['name']
 
   end
+
+  def edit
+  end
+
+  def update
+    @o_single = School.find(params[:id])
+    flash[:notice] = nil
+    if @o_single.update_attributes(school_params)
+      flash[:notice] = 'School was successfully updated.'
+    end    
+  end
+
+  private
+    # Use callbacks to share common setup or constraints between actions.
+    def set_school
+      @o_single = School.find(params[:id])
+    end
+
+    def get_users
+      @users = User.joins(:role).where(:roles => {:role_type => "Admin"})
+    end
+
 end

@@ -2,7 +2,7 @@ class Admin::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :destroy_all_selected, only: [:index]
   helper_method :sort_column, :sort_direction
-  before_action :require_admin
+  before_action :require_superadmin
 
   # GET /users
   # GET /users.json
@@ -15,7 +15,7 @@ class Admin::UsersController < ApplicationController
       session[:set_pager_number] = PER_PAGE
     end
 
-    @o_all = User.all_users.
+    @o_all = User.all_admins.
                   search(session[:search_params]).
                   order(sort_column + " " + sort_direction).
                   paginate(:per_page => session[:set_pager_number], :page => params[:page])

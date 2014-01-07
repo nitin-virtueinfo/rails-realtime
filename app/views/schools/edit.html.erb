@@ -1,0 +1,36 @@
+<%- model_class = School -%>
+<div class="page-header">
+  <h4><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h4>
+</div>
+<div id="div_update_form">
+  <!-- delete message model box -->
+  <div id="myModal" class="modal hide fade" data-backdrop="static">
+    <div class="modal-header">
+        <h3>Confirmation</h3>
+    </div>
+    <div class="modal-body">
+        <p>Some one deleted this record. Please, click Ok to reload page.</p>
+    </div>
+    <div class="modal-footer">
+        <a href="<%= admin_schools_path %>" class="btn">Ok</a>
+    </div>
+  </div>
+  <!-- delete message model box end -->
+
+	<%= render "form" %>
+</div>
+
+<script>
+  $(function() {
+    // Create a new client to connect to Faye
+    var client = new Faye.Client('http://localhost:9292/faye');
+ 
+    // Subscribe to the public channel
+    var public_subscription = client.subscribe('/admin/schools/<%= @o_single.id %>/edit', function(data) {
+      $.ajax({
+        type: "GET",
+        url: '/admin/updateschool/'+data.sid
+      });
+    });
+  });
+</script>

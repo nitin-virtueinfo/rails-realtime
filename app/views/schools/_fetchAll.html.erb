@@ -6,6 +6,7 @@
       <td><%= o_row.owner %></td>
       <td><%= o_row.city %></td>
       <td><%= o_row.state %></td>
+      <td><%= link_to t('general.edit'), edit_school_path(o_row), :class => 'btn btn-mini' %></td>
     </tr>
   <% end %>
 <% else %>

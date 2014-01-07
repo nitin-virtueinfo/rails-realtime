@@ -34,7 +34,13 @@
         </tr>
       <% end %>
     <% else %>
-      <tr><th colspan="6"><%= t("general.record_not_found") %></th></tr>
+      <tr>
+        <td colspan="7">
+          <div class="alert alert-danger tc">
+            <%= t("general.record_not_found") %>
+          </div>
+        </td>
+      </tr>
     <% end %>
   </tbody>
 </table>
